@@ -1,0 +1,66 @@
+# =========================
+# Unity Generated Folders
+# =========================
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+[Rr]ecordings/
+
+# =========================
+# User Settings
+# =========================
+UserSettings/
+.vs/
+.vscode/
+.idea/
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# Unity Auto Files
+# =========================
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+
+# Rider / JetBrains
+*.DotSettings.user
+
+# =========================
+# Crash / Cache
+# =========================
+sysinfo.txt
+
+# =========================
+# Build Output
+# =========================
+*.apk
+*.exe
+*.app
+*.xcodeproj
+*.ipa
+
+# =========================
+# Addressables / Cache
+# =========================
+[Aa]ssets/AddressableAssetsData/*/*.bin*
+
+# =========================
+# Don't ignore Assets / Packages / ProjectSettings
+# (IMPORTANT - THESE MUST BE PUSHED TO GITHUB)
+# =========================
