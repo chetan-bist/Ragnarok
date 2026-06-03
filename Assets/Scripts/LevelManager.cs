@@ -33,21 +33,58 @@ public class LevelManager : MonoBehaviour
         {
             winPanel.SetActive(true);
         }
+
+         // --- नयाँ लेभल अनलक गर्ने कोड ---
+        string sceneName = SceneManager.GetActiveScene().name;
+        string levelNumberString = sceneName.Replace("level", ""); 
+        
+        int currentLevel;
+        if (int.TryParse(levelNumberString, out currentLevel))
+        {
+            int reachedLevel = PlayerPrefs.GetInt("ReachedLevel", 1);
+
+            if (currentLevel == reachedLevel)
+            {
+                PlayerPrefs.SetInt("ReachedLevel", currentLevel + 1);
+                PlayerPrefs.Save(); 
+                Debug.Log("Next Level Unlocked: Level " + (currentLevel + 1));
+            }
+        }
     }
 
     // 🔴 NEW: Next Level UI Button le click garda yo function run garcha
     public void LoadNextLevel()
     {
-        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        // int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
         
-        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        // if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        // {
+        //     SceneManager.LoadScene(nextSceneIndex);
+        // }
+        // else
+        // {
+        //     Debug.Log("Sabai level sakiyo! Going back to Main Menu (Scene 0)");
+        //     SceneManager.LoadScene(0); // Pura game sakye pachi Main Menu scene layout grid load handine
+        // }
+
+        Time.timeScale = 1f; // गेम सुरुमा अनपज गर्ने (नत्र अर्को लेभल पनि रोकिएकै हुन्छ)
+        // अर्को लेभल लोड गर्ने (Build Settings को आधारमा)
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+         // --- तपाईंको पुरानो First-Time Player Logic यहाँ छ ---
+        if (!PlayerPrefs.HasKey("FirstTimePlayed"))
         {
-            SceneManager.LoadScene(nextSceneIndex);
+            // गेम जीवनमा पहिलो पटक खोल्दै छ भने:
+            PlayerPrefs.SetInt("FirstTimePlayed", 1);
+            PlayerPrefs.Save();
+
+            // सिधै Level1 लोड गर्ने (तपाईंको पुरानो कोडमा Scene Index २ थियो)
+            // नोट: यदि Build Settings मा level1 को index 2 हो भने ठीक छ, नत्र "level1" नाम लेख्दा झन् सुरक्षित हुन्छ।
+            SceneManager.LoadScene(2); 
         }
         else
         {
-            Debug.Log("Sabai level sakiyo! Going back to Main Menu (Scene 0)");
-            SceneManager.LoadScene(0); // Pura game sakye pachi Main Menu scene layout grid load handine
+            // पहिले नै खेलिसकेको प्लेयर हो भने Map (Level Selection) मा पठाउने
+            SceneManager.LoadScene("LevelSelection"); 
         }
     }
 
